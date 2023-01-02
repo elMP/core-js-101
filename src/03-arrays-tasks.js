@@ -35,9 +35,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  const arr = [];
-  arr.fill(0, 0, len);
-  return arr.filter((element) => element / 2 !== 0);
+  return Array.from({ length: len }, (v, i) => i * 2 + 1);
 }
 
 /**
@@ -143,8 +141,13 @@ function getStringsLength(arr) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 'x', 0  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  // throw new Error('Not implemented');
+  let newArr = arr.slice(0, index);
+  newArr.push(item);
+  newArr = newArr.concat(arr.slice(index));
+
+  return newArr;
 }
 
 /**
@@ -157,8 +160,9 @@ function insertItem(/* arr, item, index */) {
  *    [ 1, 3, 4, 5 ], 2 => [ 1, 3 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(/* arr, n */) {
-  throw new Error('Not implemented');
+function getHead(arr, n) {
+  // throw new Error('Not implemented');
+  return arr.slice(0, n);
 }
 
 /**
@@ -171,8 +175,9 @@ function getHead(/* arr, n */) {
  *    [ 1, 3, 4, 5 ], 2  => [ 4, 5 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
-function getTail(/* arr, n */) {
-  throw new Error('Not implemented');
+function getTail(arr, n) {
+  // throw new Error('Not implemented');
+  return arr.slice(arr.length - n);
 }
 
 /**
@@ -195,8 +200,23 @@ function getTail(/* arr, n */) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  // throw new Error('Not implemented');
+  let output = '';
+
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < arr[i].length; j += 1) {
+      output += arr[i][j];
+
+      if (j !== arr[i].length - 1) {
+        output += ',';
+      } else {
+        output += '\n';
+      }
+    }
+  }
+
+  return output.substring(0, output.length - 1);
 }
 
 /**
