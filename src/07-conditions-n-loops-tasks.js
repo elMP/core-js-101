@@ -134,8 +134,17 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  // throw new Error('Not implemented');
+  if (rect1.top + rect1.height < rect2.top || rect2.top + rect2.height < rect1.top) {
+    return false;
+  }
+
+  if (rect1.left + rect1.width < rect2.left || rect2.left + rect2.width < rect1.left) {
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -166,13 +175,9 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  */
 function isInsideCircle(circle, point) {
   // throw new Error('Not implemented');
-  const xMin = circle.center.x - circle.radius;
-  const xMax = circle.center.x + circle.radius;
-
-  const yMin = circle.center.y - circle.radius;
-  const yMax = circle.center.y + circle.radius;
-
-  if (point.x > xMin && point.x < xMax && point.y > yMin && point.y < yMax) {
+  if ((point.x - circle.center.x) * (point.x - circle.center.x)
+  + (point.y - circle.center.y) * (point.y - circle.center.y)
+  < circle.radius * circle.radius) {
     return true;
   }
   return false;
